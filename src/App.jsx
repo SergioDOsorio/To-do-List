@@ -8,7 +8,12 @@ function handleCreateList() {
 
 function App() {
   const [selectedList, setSelectedList] = useState(null);
-  const lists = ["My day", "Important", "Planned", "Tasks"];
+  const lists = [
+    { name: "My day", img: "sun-regular-240.png" },
+    { name: "Important", img: "star-regular-240.png" },
+    { name: "Planned", img: "calendar-alt-regular-240.png" },
+    { name: "Tasks", img: "home-alt-regular-240.png" }
+  ];
 
   return (
     <>
@@ -17,13 +22,13 @@ function App() {
           <h1 className='text-2xl text-blue-400 font-bold text-center cursor-default'>To-Do Lists</h1>
           <div className='w-full'>
             <ul className='flex flex-col w-full p-3 gap-2'>
-              {lists.map((listName, index) => (
+              {lists.map((list, index) => (
                 <ListName
                   key={index}
-                  listName={listName}
-                  listImg={`${listName}-regular-240.png`}
+                  listName={list.name}
+                  listImg={list.img}
                   onSelect={setSelectedList}
-                  isSelected={selectedList === listName}
+                  isSelected={selectedList === list.name}
                 />
               ))}
             </ul>
@@ -31,7 +36,7 @@ function App() {
           <hr className='border-neutral-50' />
           <div className='p-3'>Listas
             {lists.map((_, index) => (
-              <div key={index}></div>
+              <div key={index}>{/* Aquí puedes renderizar más listas */}</div>
             ))}
           </div>
           <hr className='border-neutral-50' />
