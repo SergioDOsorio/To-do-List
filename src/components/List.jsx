@@ -1,10 +1,13 @@
 import plusIcon from '../img/plus-regular-240.png'
-function List({ listName }) {
+import Task from './Task';
+function List({ listName, listTasks }) {
+   
     return (
         <>
             <div className="h-5/6">
                 <h2 className="text-3xl ">{listName}</h2>
-                <ul>
+                <ul className='p-4'>
+                    <Task tasks={listTasks}></Task>
                 </ul>
             </div>
             <div className="h-9 bg-neutral-800">

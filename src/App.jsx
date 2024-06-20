@@ -10,18 +10,25 @@ import plusIcon from './img/plus-regular-240.png'
 
 
 function handleCreateList() {
+  userLists.push( {name: "test", img: sunIcon, list: []})
   return
 }
 
 function App() {
   const [selectedList, setSelectedList] = useState("My day");
   const lists = [
-    { name: "My day", img: sunIcon, list: [] },
-    { name: "Important", img: starIcon, list: [] },
-    { name: "Planned", img: calendarIcon, list: [] },
-    { name: "Tasks", img: homeIcon, list: [] }
+    { name: "My day", img: sunIcon, tasks: ["Comprar huevos","Sacar al perro"] },
+    { name: "Important", img: starIcon, tasks: [] },
+    { name: "Planned", img: calendarIcon, tasks: [] },
+    { name: "Tasks", img: homeIcon, tasks: [] }
+  ];
+  const userLists = [
+    
   ];
 
+  const selectedListComplete = lists.find(list => list.name === selectedList)
+  const tasks = selectedListComplete.tasks
+ 
   return (
     <>
       <div className='flex h-screen text-neutral-50 font-sans'>
@@ -43,15 +50,20 @@ function App() {
             </div>
             <hr className='border-slate-400' />
             <div className='p-3'>Listas
-              {lists.map((_, index) => (
-                <div key={index}>{ }</div>
+              {userLists.map((userList, index) => (
+                <ListName
+                  key={index}
+                  listName={userList.name}
+                  listImg={userList.img}
+                  onSelect={setSelectedList}
+                  isSelected={selectedList === userList.name}></ListName>
               ))}
             </div>
           </div >
           <div>
             <hr className='border-slate-400' />
             <div className='p-3 text-blue-400 flex gap-2'>
-              <img src={plusIcon} alt="Add icon" className='w-8 '/>
+              <img src={plusIcon} alt="Add icon" className='w-8 ' />
               <button onClick={handleCreateList} className='text-xl'>Create new list</button>
             </div>
           </div>
@@ -59,9 +71,8 @@ function App() {
         <div className='w-4/5 bg-neutral-900 p-4' >
           <div className='bg-neutral-800 rounded p-3 h-full flex flex-col justify-around	'>
             {
-              <List listName={selectedList} ></List>
+              <List listName={selectedList} listTasks={tasks}></List>
             }
-
           </div>
         </div>
       </div>
